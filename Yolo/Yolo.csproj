@@ -222,6 +222,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\cameraMove.cs" />
     <Compile Include="Assets\drop Shit.cs" />
     <Compile Include="Assets\dropshit.cs" />
     <Compile Include="Assets\dropTest.cs" />
