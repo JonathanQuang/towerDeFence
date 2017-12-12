@@ -13,6 +13,7 @@ public class cameraMove : MonoBehaviour {
 	
 	public float speed = 5.0f;
 	public float yOil = 0.0f;
+	private RaycastHit vision;
 	
 	// Update is called once per frame
 	void Update () {
@@ -51,6 +52,13 @@ public class cameraMove : MonoBehaviour {
 		if(Input.GetKey(KeyCode.Q)){
 			yOil += -speed * Time.deltaTime * 5.0f;
 		}
+
+		Vector3 forward = transform.TransformDirection(Vector3.forward) * 10;
+		Debug.DrawRay(transform.position, forward, Color.green);
+		Physics.Raycast (Camera.main.transform.position, Camera.main.transform.forward, out vision, 4.0f);
+		Debug.ClearDeveloperConsole ();
+		print (vision.collider);
+
 	}
 }
 

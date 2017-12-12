@@ -14,6 +14,10 @@ public class dropShit : MonoBehaviour {
             print(p.y);
             Instantiate(fence, new Vector3(p.x, p.y, 0.0f), Quaternion.identity);
         }
-    }
+
+		Vector3 forward = transform.TransformDirection(Vector3.forward) * 10;
+		Debug.DrawRay(transform.position, forward, Color.green);
+		print ("draw");
+	}
 }
 
