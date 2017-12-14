@@ -13,8 +13,8 @@ public class cameraMove : MonoBehaviour {
 	
 	public float speed = 5.0f;
 	public float yOil = 0.0f;
-	private RaycastHit vision;
-	
+	public GameObject fence;
+
 	// Update is called once per frame
 	void Update () {
 		
@@ -53,11 +53,28 @@ public class cameraMove : MonoBehaviour {
 			yOil += -speed * Time.deltaTime * 5.0f;
 		}
 
-		Vector3 forward = transform.TransformDirection(Vector3.forward) * 10;
-		Debug.DrawRay(transform.position, forward, Color.green);
-		Physics.Raycast (Camera.main.transform.position, Camera.main.transform.forward, out vision, 4.0f);
+		/*
+		ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+		Debug.DrawRay(ray.origin,ray.direction);
+		Physics.Raycast(ray, out hit);
 		Debug.ClearDeveloperConsole ();
-		print (vision.collider);
+		print (hit.ToString());
+		*/
+
+		Ray ray = Camera.main.ScreenPointToRay (Input.mousePosition); //Convert mouse position to raycast
+		RaycastHit hit; //Create a RaycastHit variable to store the hit data into
+		Vector3 clickedPosition; //Create a vector3 variable to store the clicked position in
+
+		if (Input.GetMouseButtonDown (0) && Physics.Raycast (ray, out hit, 1000)) //If the user clicks the left mouse button and we hit an object with our raycast then
+		{
+			//clickedPosition = hit.point; //Store the hit position into the clicked position variable
+			print(hit.point);
+			Quaternion identityThing = new Quaternion (0, 0, 0, 0);
+			Instantiate (fence, hit.point, identityThing);
+		}
+
+
+
 
 	}
 }
